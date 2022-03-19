@@ -8,6 +8,7 @@ import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
+import java.util.Scanner;
 import java.util.logging.Logger;
 
 import com.org.filemanagement.operations.FileProcessor;
@@ -19,9 +20,20 @@ public class FileWatcher {
 	public static void main(String[] args) throws IOException, InterruptedException {
 
 		LOGGER.info("Logger Name: " + LOGGER.getName());
-		Path sourcePath = Paths.get("C:/Srinivas_Data/Technology/FileProcess/filemanagement/source");
-		Path destinationPath = Paths.get("C:/Srinivas_Data/Technology/FileProcess/filemanagement/destination");
-		Path errorFilesPath = Paths.get("C:/Srinivas_Data/Technology/FileProcess/filemanagement/destination/error");
+		Scanner scanner = new Scanner(System.in);
+		 
+		 System.out.println("Enter file source folder path");
+		 Path sourcePath = Paths.get(scanner.nextLine());   
+		 
+		 System.out.println("Enter destination folder path");
+		 Path destinationPath = Paths.get(scanner.nextLine());  
+		 
+		 System.out.println("Enter destination error folder path");
+		 Path errorFilesPath  = Paths.get(scanner.nextLine());  
+		 
+		 // closes the scanner
+		 scanner.close();
+		 
 
 		WatchService watchService = FileSystems.getDefault().newWatchService();
 		sourcePath.register(watchService, StandardWatchEventKinds.ENTRY_CREATE);
